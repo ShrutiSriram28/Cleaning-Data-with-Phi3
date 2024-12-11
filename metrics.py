@@ -1,14 +1,9 @@
 import pandas as pd
 
 def load_csv(file_path: str) -> pd.DataFrame:
-    """Load a CSV file."""
     return pd.read_csv(file_path)
 
 def calculate_metrics(clean_file: pd.DataFrame, cleaned_file: pd.DataFrame, error_file: pd.DataFrame) -> pd.DataFrame:
-    """
-    Calculate precision, recall, and F1-score for the cleaned file
-    compared to the clean file (ground truth) and error file (input with errors).
-    """
     if not all(clean_file.columns == cleaned_file.columns) or not all(clean_file.columns == error_file.columns):
         raise ValueError("Files have mismatched columns.")
 

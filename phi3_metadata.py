@@ -40,16 +40,6 @@ def create_station_metadata(csv_data):
         })
 
 def find_matching_station(station_info, is_start_station=True):
-    """
-    Find matching station from metadata by matching any of the parameters.
-    
-    Args:
-        station_info (dict): Dictionary containing station information from the row
-        is_start_station (bool): True if looking for start station, False for end station
-    
-    Returns:
-        dict: Matching station from metadata
-    """
     prefix = 'start_' if is_start_station else 'end_'
     
     # Get the station details from the row
@@ -80,8 +70,7 @@ def find_matching_station(station_info, is_start_station=True):
     
     return None
 
-def create_compact_prompt(row):
-    """Create a shorter, more memory-efficient prompt with station metadata"""
+def create_prompt(row):
     # Find matching stations from metadata
     start_station_match = find_matching_station(row, is_start_station=True)
     end_station_match = find_matching_station(row, is_start_station=False)
@@ -141,7 +130,6 @@ def create_compact_prompt(row):
 
 # Rest of the functions remain the same
 def load_phi3_model():
-    """Initialize and load the Phi-3 model with optimized settings"""
     torch.random.manual_seed(0)
     
     device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
@@ -166,12 +154,11 @@ def load_phi3_model():
     return model, tokenizer, device
 
 def process_single_row(row_data, pipe, generation_args):
-    """Process a single row using Phi-3 model"""
     row, row_number = row_data
     
     messages = [
         {"role": "system", "content": "You are a data cleaning expert."},
-        {"role": "user", "content": create_compact_prompt(row)}
+        {"role": "user", "content": create_prompt(row)}
     ]
     
     try:
@@ -202,7 +189,6 @@ def process_single_row(row_data, pipe, generation_args):
         return row
 
 def clean_csv_with_phi3(csv_path, clean_csv_path, max_rows=None):
-    """Main function optimized for performance"""
     try:
         model, tokenizer, device = load_phi3_model()
         

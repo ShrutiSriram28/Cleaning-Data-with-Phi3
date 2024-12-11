@@ -6,9 +6,7 @@ from tqdm import tqdm
 import gc
 from difflib import SequenceMatcher
 
-def create_compact_prompt(row):
-    """Create a shorter, more memory-efficient prompt with station metadata"""
-    
+def create_prompt(row):
     prompt = f"""Clean this bike data row:
         ride_id: {row.get('ride_id', '')}
         rideable_type: {row.get('rideable_type', '')}
@@ -39,7 +37,6 @@ def create_compact_prompt(row):
 
 # Rest of the functions remain the same
 def load_phi3_model():
-    """Initialize and load the Phi-3 model with optimized settings"""
     torch.random.manual_seed(0)
     
     device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
@@ -64,12 +61,11 @@ def load_phi3_model():
     return model, tokenizer, device
 
 def process_single_row(row_data, pipe, generation_args):
-    """Process a single row using Phi-3 model"""
     row, row_number = row_data
     
     messages = [
         {"role": "system", "content": "You are a data cleaning expert."},
-        {"role": "user", "content": create_compact_prompt(row)}
+        {"role": "user", "content": create_prompt(row)}
     ]
     
     try:
@@ -100,7 +96,6 @@ def process_single_row(row_data, pipe, generation_args):
         return row
 
 def clean_csv_with_phi3(csv_path, max_rows=None):
-    """Main function optimized for performance"""
     try:
         model, tokenizer, device = load_phi3_model()
         

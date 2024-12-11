@@ -5,17 +5,6 @@ from collections import OrderedDict
 
 
 def flatten_json(nested_json: Dict, parent_key: str = '', separator: str = '_') -> OrderedDict:
-    """
-    Flatten a nested JSON structure into a flat OrderedDict with compound keys.
-    
-    Args:
-        nested_json: The nested JSON dictionary to flatten
-        parent_key: The base key to prepend (used in recursion)
-        separator: Character to separate nested keys
-    
-    Returns:
-        A flattened OrderedDict with compound keys, maintaining order
-    """
     items: List = []
     for key, value in nested_json.items():
         new_key = f"{parent_key}{separator}{key}" if parent_key else key
@@ -32,14 +21,6 @@ def flatten_json(nested_json: Dict, parent_key: str = '', separator: str = '_') 
     return OrderedDict(items)
 
 def json_to_csv_with_order(json_file_path: str, csv_file_path: str, column_order: List[str]) -> None:
-    """
-    Convert a JSON file to CSV format with a specified column order.
-
-    Args:
-        json_file_path: Path to the input JSON file.
-        csv_file_path: Path where the CSV file will be saved.
-        column_order: List of column names in the desired order.
-    """
     try:
         # Read JSON file with object_pairs_hook to maintain order
         with open(json_file_path, 'r', encoding='utf-8') as json_file:

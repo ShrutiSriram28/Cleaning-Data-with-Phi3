@@ -15,7 +15,6 @@ class DataErrorGenerator:
         self.coordinate_variants = {}
         
     def _generate_invalid_datetime(self) -> str:
-        """Generate an invalid datetime outside the valid range."""
         if random.random() < 0.5:
             # Generate date before valid start
             invalid_dt = self.valid_start - datetime.timedelta(
@@ -35,7 +34,6 @@ class DataErrorGenerator:
         return invalid_dt.strftime(self.base_datetime_format)
 
     def _format_datetime(self, dt_str: str) -> str:
-        """Apply random date format transformation."""
         try:
             dt = datetime.datetime.strptime(dt_str, self.base_datetime_format)
             formats = [
@@ -105,7 +103,6 @@ class DataErrorGenerator:
             return start_dt, end_dt
 
     def _get_station_variants(self, name: str, station_id: str, lat: float = None, lng: float = None) -> dict:
-        """Initialize or get station variants including coordinates."""
         if pd.isna(name):
             return {'names': [name], 'ids': [station_id], 'coordinates': [(lat, lng)]}
             
@@ -171,7 +168,6 @@ class DataErrorGenerator:
         return modified_name, modified_id
     
     def _modify_coordinates(self, lat: float, lng: float, station_name: str, station_id: str) -> Tuple[float, float]:
-        """Modify coordinates consistently for the same station."""
         if pd.isna(station_name) or pd.isna(lat) or pd.isna(lng):
             return lat, lng
             
