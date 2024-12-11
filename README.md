@@ -50,7 +50,7 @@ Simple errors have been introduced to the clean dataset using `corrupt_data.py`.
 * **member_casual:**
     - typos (_example: membr, causual, etc._)
 
-`testfile.csv` contains the truncated dataset infused with 10% error.
+`testfile.csv` contains the truncated dataset infused with 15% error.
 
 ## Prompts:
 
