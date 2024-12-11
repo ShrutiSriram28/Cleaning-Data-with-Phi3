@@ -261,3 +261,6 @@ prompt = f"""Clean this bike data row:
     Return a JSON object with the cleaned data using EXACTLY the field names shown above:
 """
 ```
+
+## Note:
+File names need to be modified before running the code.
