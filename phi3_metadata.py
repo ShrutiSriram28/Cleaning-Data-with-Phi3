@@ -249,4 +249,4 @@ def clean_csv_with_phi3(csv_path, clean_csv_path, max_rows=None):
 
 if __name__ == "__main__":
     create_station_metadata('clean_testfile.csv')
-    clean_csv_with_phi3("testfile_15.csv", "clean_testfile.csv", max_rows=100)
+    clean_csv_with_phi3("testfile.csv", "clean_testfile.csv", max_rows=100)
