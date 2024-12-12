@@ -262,5 +262,14 @@ prompt = f"""Clean this bike data row:
 """
 ```
 
+## Steps to follow:
+* Install the dependencies
+```
+pip install -r requirements.txt
+```
+* Run the prompt files (`phi3_no_metadata.py`/`phi3_columns.py`/`phi3_metadata.py`/`phi3_few_shot.py`). 
+* Run `json_to_csv.py` to convert the JSON files to CSV. 
+* Run `metrics.py` to get the metrics.
+
 ## Note:
-File names need to be modified before running the code.
+Modify the file names before running the code.
