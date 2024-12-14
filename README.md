@@ -34,8 +34,9 @@ Simple errors have been introduced to the clean dataset using `corrupt_data.py`.
     - lower case characters to an all upper case string
     - spaces
 * **rideable_type:**
-    - typos
+    - typos (example: “electric bike”, “class_bike”, etc.)
     - missing values
+
 * **start_at and end_at:**
     - formatting error (_example: YYYYMMDD hhmmss, YYYY/MM/DD hh-mm-ss, etc._)
     - missing values
